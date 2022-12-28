@@ -7,9 +7,15 @@ export class Folder extends FileEntry {
   constructor(
     name: string,
     parent: FileEntry | null,
-    public children: FolderChildren
+    private children: FolderChildren
   ) {
     super(name, parent);
+  }
+
+  add(fileEntry: FileEntry) {
+    if (this.children[fileEntry.name])
+      throw new Error("The requested folder/file name is duplicated.");
+    this.children[fileEntry.name] = fileEntry;
   }
 
   getChild(name: string): FileEntry | null {
