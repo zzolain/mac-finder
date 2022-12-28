@@ -30,7 +30,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  border-bottom: 0.5px solid var(--color-ink300);
+  border-bottom: 1px solid var(--color-ink300);
   .icon {
     font-size: 24px;
     color: var(--color-ink400);

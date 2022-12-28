@@ -19,6 +19,6 @@ export const Lane = ({ depth, folder: fileEntry }: Props) => {
 const Container = styled.ul`
   min-width: 200px;
   height: 100%;
-  border-right: 0.5px solid var(--color-ink300);
+  border-right: 1px solid var(--color-ink300);
   padding: 10px;
 `;

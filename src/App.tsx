@@ -35,6 +35,7 @@ function App() {
 const Container = styled.div`
   display: flex;
   height: 100vh;
+  overflow: hidden;
 `;
 
 const Main = styled.main`
