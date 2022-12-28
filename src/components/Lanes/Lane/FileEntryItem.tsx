@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from "react";
-import { useFileTreeStore } from "../../domains/FileEntry/hooks/useFileTreeStore";
-import { FileEntry } from "../../domains/FileEntry/models/FileEntry";
-import { Folder } from "../../domains/FileEntry/models/Folder";
-import { File } from "../../domains/FileEntry/models/File";
+import { useFileTreeStore } from "../../../domains/FileEntry/hooks/useFileTreeStore";
+import { FileEntry } from "../../../domains/FileEntry/models/FileEntry";
+import { Folder } from "../../../domains/FileEntry/models/Folder";
+import { File } from "../../../domains/FileEntry/models/File";
 import styled from "styled-components";
 import { TbFolder, TbFile, TbChevronRight } from "react-icons/tb";
 
@@ -19,7 +19,11 @@ export const FileEntryItem = ({ depth, fileEntry }: Props) => {
     () => select(depth, fileEntry),
     [depth, fileEntry]
   );
-  const isSelected = useMemo(
+  const currentSelected = useMemo(
+    () => path[path.length - 1].name === fileEntry.name,
+    [path, fileEntry]
+  );
+  const selectedBefore = useMemo(
     () => path[depth + 1] === fileEntry,
     [depth, fileEntry, path]
   );
@@ -30,22 +34,23 @@ export const FileEntryItem = ({ depth, fileEntry }: Props) => {
     return () => null;
   }, [fileEntry]);
 
-  const SideIcon = useMemo(() => {
-    if (fileEntry instanceof Folder)
-      return () => <NextIcon selected={isSelected} />;
-    return () => null;
-  }, [fileEntry]);
   return (
-    <Container data-testid="top-child" onClick={onClick} selected={isSelected}>
+    <Container
+      data-testid="top-child"
+      onClick={onClick}
+      currentSelected={currentSelected}
+      selectedBefore={selectedBefore}
+    >
       <Icon />
-      <ItemName selected={isSelected}>{fileEntry.name}</ItemName>
-      <SideIcon />
+      <ItemName currentSelected={currentSelected}>{fileEntry.name}</ItemName>
+      {fileEntry instanceof Folder && <NextIcon selected={currentSelected} />}
     </Container>
   );
 };
 
 type ContainerProps = {
-  selected: boolean;
+  currentSelected: boolean;
+  selectedBefore: boolean;
 };
 const Container = styled.li<ContainerProps>`
   display: flex;
@@ -53,20 +58,25 @@ const Container = styled.li<ContainerProps>`
   gap: 4px;
   padding: 3px;
   background-color: ${(props) =>
-    props.selected ? "var(--color-blue)" : "none"};
+    props.currentSelected
+      ? "var(--color-blue)"
+      : props.selectedBefore
+      ? "var(--color-ink300)"
+      : "none"};
   border-radius: 6px;
   cursor: pointer;
   span {
-    font-size: 0.9em;
+    font-size: 0.875em;
+    line-height: 1;
   }
 `;
 
 type ItemNameProps = {
-  selected: boolean;
+  currentSelected: boolean;
 };
 const ItemName = styled.span<ItemNameProps>`
   color: ${(props) =>
-    props.selected ? "var(--color-ink100)" : "var(--color-ink700)"};
+    props.currentSelected ? "var(--color-ink100)" : "var(--color-ink700)"};
 `;
 
 const FileIcon = styled(TbFile)`
@@ -89,5 +99,5 @@ const NextIcon = styled(TbChevronRight)<NextIconProps>`
   vertical-align: middle;
   margin-left: auto;
   color: ${(props) =>
-    props.selected ? "var(--color-ink100)" : "var(--color-ink400)"};
+    props.selected ? "var(--color-ink100)" : "var(--color-ink700)"};
 `;

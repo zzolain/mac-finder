@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Folder } from "../../domains/FileEntry/models/Folder";
+import { Folder } from "../../../domains/FileEntry/models/Folder";
 import { FileEntryItem } from "./FileEntryItem";
 
 type Props = {
