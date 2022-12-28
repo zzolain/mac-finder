@@ -1,18 +1,28 @@
 import styled from "styled-components";
 import { TbChevronLeft, TbChevronRight, TbSearch } from "react-icons/tb";
+import { useFileTreeStore } from "../../domains/FileEntry/hooks/useFileTreeStore";
+import { useMemo } from "react";
 
-export const StatusBar = () => (
-  <Container>
-    <LeftCol>
-      <TbChevronLeft className="icon" />
-      <TbChevronRight className="icon" />
-      <span>Recent</span>
-    </LeftCol>
-    <RightCol>
-      <TbSearch className="icon" />
-    </RightCol>
-  </Container>
-);
+export const StatusBar = () => {
+  const path = useFileTreeStore((state) => state.path);
+  const entryName = useMemo(
+    () => path[path.length - 1]?.name ?? "Recent",
+    [path]
+  );
+
+  return (
+    <Container>
+      <LeftCol>
+        <TbChevronLeft className="icon" />
+        <TbChevronRight className="icon" />
+        <EntryName>{entryName}</EntryName>
+      </LeftCol>
+      <RightCol>
+        <TbSearch className="icon" />
+      </RightCol>
+    </Container>
+  );
+};
 
 const Container = styled.div`
   background-color: var(--color-ink200);
@@ -38,4 +48,9 @@ const LeftCol = styled.div`
 const RightCol = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const EntryName = styled.span`
+  color: var(--color-ink600);
+  font-weight: 600;
 `;

@@ -3,36 +3,41 @@ import { z } from "zod";
 import { isAlaphanumeric } from "../../../utils/validation/stringValidation";
 import { Folder } from "../models/Folder";
 import { File as FileLeaf } from "../models/File";
+import { FileEntry } from "../models/FileEntry";
 
-type State = {
+type States = {
   root: Folder | null;
+  path: FileEntry[];
 };
 
 type Actions = {
   read: (file: File) => void;
+  select: (depth: number, fileEntry: FileEntry) => void;
   reset: () => void;
 };
 
-const initialState: State = {
+const initialState: States = {
   root: null,
+  path: [],
 };
 
-export const useFileTreeStore = create<State & Actions>((set) => ({
-  root: null,
-
-  async read(file: File) {
+export const useFileTreeStore = create<States & Actions>((set, get) => ({
+  root: initialState.root,
+  path: initialState.path,
+  read: async (file: File) => {
     try {
       validateFile(file);
       const root = await readFile(file);
-      set({ root });
+      set({ root, path: [root] });
     } catch (error) {
       console.error(error);
     }
   },
-
-  reset() {
-    set(initialState);
+  select: (depth, fileEntry) => {
+    const prevDepth = get().path.slice(0, depth + 1);
+    set({ path: prevDepth.concat(fileEntry) });
   },
+  reset: () => set(initialState),
 }));
 
 const validateFile = (file: File) => {
