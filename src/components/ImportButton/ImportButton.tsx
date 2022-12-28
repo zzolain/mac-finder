@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import { useFileTreeStore } from "../../domains/FileEntry/hooks/useFileTreeStore";
+import styled from "styled-components";
+import { TbFileImport } from "react-icons/tb";
 
 export const ImportButton = () => {
   const read = useFileTreeStore((state) => state.read);
@@ -12,7 +13,7 @@ export const ImportButton = () => {
   return (
     <Container>
       <Label htmlFor="json-input" role="button">
-        Import
+        <TbFileImport className="icon" /> Import
       </Label>
       <HiddenInput
         id="json-input"
@@ -28,14 +29,22 @@ export const ImportButton = () => {
 
 const Container = styled.div``;
 const Label = styled.label`
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 5px;
   color: var(--color-ink600);
-  background-color: var(--color-ink200);
-  padding: 0.4em 0.8em;
+  background-color: var(--color-ink300);
+  padding: 0.4em;
   border-radius: 0.4em;
   cursor: pointer;
   &:hover {
-    background-color: var(--color-ink300);
+    filter: brightness(90%);
+  }
+  .icon {
+    color: var(--color-blue);
+    vertical-align: middle;
+    width: 1.2em;
+    height: 1.2em;
   }
 `;
 const HiddenInput = styled.input`
