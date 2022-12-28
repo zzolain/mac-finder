@@ -40,17 +40,27 @@ npm run dev
 
 ## 기술스택
 
-- [React](https://reactjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Zod](https://github.com/colinhacks/zod)
-- [Zustand](https://github.com/pmndrs/zustand)
-- [Vite](https://vitejs.dev/)
+- UI
+  - [React](https://reactjs.org/)
+  - [Styled-components](https://styled-components.com/)
+- Type Management
+  - [TypeScript](https://www.typescriptlang.org/)
+  - [Zod](https://github.com/colinhacks/zod)
+- State Management
+  - [Zustand](https://github.com/pmndrs/zustand)
+- Build Tool
+  - [Vite](https://vitejs.dev/)
+- Test
+  - [Vitest](https://vitest.dev/)
+  - [React Testing Library](https://testing-library.com/)
 
 ## 설계
 
-![MacFinder@2x.png](/public/static/readme/macFinder.png)
+![MacFinder@2x.png](/public/readme/macFinder.png)
 
-## 고민했던 부분
+## 고민한 부분
+
+JSON → 객체 변환 과정이 반복문 + 재귀문이라 시간복잡도가 매우 높음
 
 ## 문제 해결
 
@@ -62,4 +72,4 @@ npm run dev
   - 클라이언트에서 개별 객체와 복합 객체를 똑같은 방법으로 다를 수 있음.
     즉, 복합 객체와 개별 객체를 구분할 필요가 거의 없어짐
   - 자식 원소가 있는 원소를 `Node`, 자식 원소가 없는 원소를 `Leaf`라고 함
-    ![Diagram of Composite Pattern](/public/static/readme/composite-pattern.png)
+    ![Diagram of Composite Pattern](/public/readme/composite-pattern.png)
