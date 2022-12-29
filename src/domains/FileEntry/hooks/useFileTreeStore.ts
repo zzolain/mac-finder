@@ -1,9 +1,8 @@
 import create from "zustand";
-import { z } from "zod";
-import { isAlaphanumeric } from "../../../utils/validation/stringValidation";
 import { Folder } from "../models/Folder";
-import { File as FileLeaf } from "../models/File";
 import { FileEntry } from "../models/FileEntry";
+import { fileEntryTranslator } from "../translator/fileEntryTranslator";
+import SAMPLE_JSON from "../../../assets/sample/sample-file-tree.json";
 
 type States = {
   root: Folder | null;
@@ -19,9 +18,12 @@ type Actions = {
   reset: () => void;
 };
 
+const sampleRoot = fileEntryTranslator.fromJSON(
+  JSON.parse(JSON.stringify(SAMPLE_JSON))
+);
 const initialState: States = {
-  root: null,
-  path: [],
+  root: sampleRoot,
+  path: [sampleRoot],
 };
 
 export const useFileTreeStore = create<States & Actions>((set, get) => ({
@@ -90,57 +92,11 @@ const readFile = (file: File): Promise<Folder> => {
         if (!event.target?.result || typeof event.target.result !== "string")
           throw new Error("파일을 읽는 데 실패하였습니다.");
         const json = JSON.parse(event.target.result);
-        const fileTreeDTO = jsonToDTO(json);
-        const root = dtoToEntity(fileTreeDTO);
+        const root = fileEntryTranslator.fromJSON(json);
         resolve(root);
       } catch (error) {
         reject(error);
       }
     };
   });
-};
-
-export const fileTreeDTO = z.map(
-  z.string().refine(isAlaphanumeric),
-  z.string()
-);
-type FileTreeDTO = z.infer<typeof fileTreeDTO>;
-
-const jsonToDTO = (json: JSON) => {
-  return fileTreeDTO.parse(new Map(Object.entries(json)));
-};
-
-const dtoToEntity = (dto: FileTreeDTO) => {
-  const root = new Folder("root", null, {});
-  dto.forEach((value, key) => {
-    const fileEntryNames = key.split(".");
-    createChildren(root, fileEntryNames, value);
-  });
-  return root;
-};
-
-const createChildren = (
-  parent: Folder,
-  entryNames: string[],
-  fileContent: string
-): Folder => {
-  const entryName = entryNames.shift();
-  if (!entryName) return parent;
-  if (entryNames.length === 0) {
-    const file = new FileLeaf(entryName, parent, fileContent);
-    parent.add(file);
-    return parent;
-  }
-
-  const duplicatedChild = parent.getChild(entryName);
-  if (!duplicatedChild || duplicatedChild instanceof FileLeaf) {
-    const folder = new Folder(entryName, parent, {});
-    parent.add(folder);
-  }
-
-  return createChildren(
-    parent.getChild(entryName) as Folder,
-    entryNames,
-    fileContent
-  );
 };

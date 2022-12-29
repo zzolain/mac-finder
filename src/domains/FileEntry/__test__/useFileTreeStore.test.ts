@@ -1,4 +1,4 @@
-import { fileTreeDTO } from "../hooks/useFileTreeStore";
+import { fileTreeDTO } from "../translator/fileEntryTranslator";
 import {
   MOCK_VALID_FILE_INPUT,
   MOCK_INVALID_FILE_INPUT_1,
