@@ -8,9 +8,9 @@ import { FilePreview } from "./Lane/FilePreview";
 
 export const Lanes = () => {
   const path = useFileTreeStore((state) => state.path);
-  const { goToPrev, goToNext, goToSibling } = useFileTreeStore((state) => ({
-    goToPrev: state.goToPrev,
-    goToNext: state.goToNext,
+  const { goToParent, goToChild, goToSibling } = useFileTreeStore((state) => ({
+    goToParent: state.goToParent,
+    goToChild: state.goToChild,
     goToSibling: state.goToSibling,
   }));
 
@@ -18,8 +18,8 @@ export const Lanes = () => {
     const ALLOWED_KEYS = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
     if (!ALLOWED_KEYS.includes(e.code)) return;
     e.preventDefault();
-    if (e.code === "ArrowLeft") return goToPrev();
-    if (e.code === "ArrowRight") return goToNext();
+    if (e.code === "ArrowLeft") return goToParent();
+    if (e.code === "ArrowRight") return goToChild();
     if (e.code === "ArrowUp") return goToSibling("prev");
     if (e.code === "ArrowDown") return goToSibling("next");
   }, []);

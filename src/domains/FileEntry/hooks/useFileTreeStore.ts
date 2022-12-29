@@ -12,8 +12,8 @@ type States = {
 type Actions = {
   read: (file: File) => void;
   select: (depth: number, fileEntry: FileEntry) => void;
-  goToNext: () => void;
-  goToPrev: () => void;
+  goToChild: () => void;
+  goToParent: () => void;
   goToSibling: (direction: "prev" | "next") => void;
   reset: () => void;
 };
@@ -42,7 +42,7 @@ export const useFileTreeStore = create<States & Actions>((set, get) => ({
     const prevDepth = get().path.slice(0, depth + 1);
     set({ path: prevDepth.concat(fileEntry) });
   },
-  goToNext: () => {
+  goToChild: () => {
     const { path } = get();
     if (path.length < 1) return;
     const current = path[path.length - 1];
@@ -50,7 +50,7 @@ export const useFileTreeStore = create<States & Actions>((set, get) => ({
     const firstChild = current.getChildren()[0];
     set((state) => ({ path: state.path.concat(firstChild) }));
   },
-  goToPrev: () => {
+  goToParent: () => {
     const { path } = get();
     if (path.length <= 2) return;
     set((state) => ({ path: state.path.slice(0, state.path.length - 1) }));
