@@ -23,10 +23,12 @@ export const useDrag = (
   }, [onPointerMove, onPointerUp]);
 
   const cleanUpListeners = useCallback(() => {
+    if (!target.current) return;
+    console.log("CLEARD");
     target.current?.removeEventListener("pointerdown", onPointerDown);
     window.removeEventListener("pointermove", onPointerMove);
     window.removeEventListener("pointerup", onPointerUp);
-  }, [onPointerMove, onPointerUp]);
+  }, [onPointerDown, onPointerMove, onPointerUp]);
 
   useEffect(() => {
     addListeners();

@@ -41,12 +41,12 @@ export const StatusBar = () => {
 };
 
 const Container = styled.div`
-  background-color: var(--color-ink200);
+  background-color: ${(props) => props.theme.color.ink200};
   height: 50px;
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  border-bottom: 1px solid var(--color-ink300);
+  border-bottom: 1px solid ${(props) => props.theme.color.ink300};
 `;
 
 const LeftCol = styled.div`
@@ -56,27 +56,27 @@ const LeftCol = styled.div`
 
 const LeftIcon = styled(TbChevronLeft)`
   font-size: 24px;
-  color: var(--color-ink400);
+  color: ${(props) => props.theme.color.ink400};
   margin: 5px;
   vertical-align: middle;
   cursor: pointer;
   :hover {
-    color: var(--color-ink500);
+    color: ${(props) => props.theme.color.ink500};
   }
 `;
 
 const RightIcon = styled(TbChevronRight)`
   font-size: 24px;
-  color: var(--color-ink400);
+  color: ${(props) => props.theme.color.ink400};
   margin: 5px;
   vertical-align: middle;
   cursor: pointer;
   :hover {
-    color: var(--color-ink500);
+    color: ${(props) => props.theme.color.ink500};
   }
 `;
 const EntryName = styled.span`
-  color: var(--color-ink600);
+  color: ${(props) => props.theme.color.ink600};
   font-weight: 600;
 `;
 
@@ -87,11 +87,11 @@ const RightCol = styled.div`
 
 const SearchIcon = styled(TbSearch)`
   font-size: 20px;
-  color: var(--color-ink400);
+  color: ${(props) => props.theme.color.ink400};
   margin: 5px;
   vertical-align: middle;
   cursor: pointer;
   :hover {
-    color: var(--color-ink500);
+    color: ${(props) => props.theme.color.ink500};
   }
 `;

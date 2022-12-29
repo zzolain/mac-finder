@@ -32,8 +32,8 @@ const Label = styled.label`
   display: flex;
   align-items: center;
   gap: 5px;
-  color: var(--color-ink600);
-  background-color: var(--color-ink300);
+  color: ${(props) => props.theme.color.ink600};
+  background-color: ${(props) => props.theme.color.ink300};
   padding: 0.4em;
   border-radius: 0.4em;
   cursor: pointer;
@@ -41,7 +41,7 @@ const Label = styled.label`
     filter: brightness(90%);
   }
   .icon {
-    color: var(--color-blue);
+    color: ${(props) => props.theme.color.blue};
     vertical-align: middle;
     width: 1.2em;
     height: 1.2em;

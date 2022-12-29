@@ -41,5 +41,7 @@ export const Lanes = () => {
 const Conatiner = styled.section`
   display: flex;
   height: 100%;
+  width: ${(props) => `calc(100vw - ${props.theme.layout.sidebarWidth})`};
+  overflow-x: scroll;
   outline: none;
 `;

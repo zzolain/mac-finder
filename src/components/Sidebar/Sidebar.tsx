@@ -18,10 +18,11 @@ export const Sidebar = () => {
 };
 
 const Container = styled.div`
-  width: 180px;
-  background-color: var(--color-ink300);
+  flex: 0 0 auto;
+  width: ${(props) => props.theme.layout.sidebarWidth};
+  background-color: ${(props) => props.theme.color.ink300};
   padding: 10px;
-  border-right: 0.5px solid var(--color-ink400);
+  border-right: 0.5px solid ${(props) => props.theme.color.ink400};
   height: 100%;
 `;
 
@@ -36,7 +37,7 @@ type SystemButtonProps = {
   color: "red" | "yellow" | "green";
 };
 const SystemButton = styled.div<SystemButtonProps>`
-  background-color: ${(props) => `var(--color-${props.color})`};
+  background-color: ${(props) => props.theme.color[props.color]};
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -65,6 +66,6 @@ const Section = styled.section`
 const SectionLabel = styled.h5`
   font-size: 0.8em;
   font-weight: 600;
-  color: var(--color-ink500);
+  color: ${(props) => props.theme.color.ink500};
   padding: 2px 8px;
 `;

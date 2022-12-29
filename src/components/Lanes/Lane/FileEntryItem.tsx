@@ -55,39 +55,43 @@ type ContainerProps = {
 const Container = styled.li<ContainerProps>`
   display: flex;
   align-items: center;
-  gap: 4px;
   padding: 3px;
   background-color: ${(props) =>
     props.currentSelected
-      ? "var(--color-blue)"
+      ? props.theme.color.blue
       : props.selectedBefore
-      ? "var(--color-ink300)"
-      : "none"};
+      ? props.theme.color.ink300
+      : "unset"};
   border-radius: 6px;
   cursor: pointer;
-  span {
-    font-size: 0.875em;
-    line-height: 1;
-  }
 `;
 
 type ItemNameProps = {
   currentSelected: boolean;
 };
 const ItemName = styled.span<ItemNameProps>`
+  margin-left: 4px;
+  font-size: 0.875em;
   color: ${(props) =>
-    props.currentSelected ? "var(--color-ink100)" : "var(--color-ink700)"};
+    props.currentSelected
+      ? props.theme.color.ink100
+      : props.theme.color.ink700};
+  width: 80%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  vertical-align: middle;
 `;
 
 const FileIcon = styled(TbFile)`
-  color: var(--color-ink700);
-  fill: var(--color-ink100);
+  color: ${(props) => props.theme.color.ink700};
+  fill: ${(props) => props.theme.color.ink100};
   vertical-align: middle;
 `;
 
 const FolderIcon = styled(TbFolder)`
-  color: var(--color-ink700);
-  fill: var(--color-skyblue);
+  color: ${(props) => props.theme.color.ink700};
+  fill: ${(props) => props.theme.color.skyblue};
   vertical-align: middle;
 `;
 
@@ -98,6 +102,5 @@ const NextIcon = styled(TbChevronRight)<NextIconProps>`
   width: 0.6em;
   vertical-align: middle;
   margin-left: auto;
-  color: ${(props) =>
-    props.selected ? "var(--color-ink100)" : "var(--color-ink700)"};
+  color: ${(props) => (props.selected ? props.theme.color.ink100 : props)};
 `;

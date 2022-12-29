@@ -21,7 +21,8 @@ const Container = styled.div`
 `;
 
 const ContentContainer = styled.div`
-  border: 0.5px solid var(--color-ink400);
+  flex: 0 0 300px;
+  border: 0.5px solid ${(props) => props.theme.color.ink400};
   border-radius: 5px;
   padding: 0.4em 0.6em;
   overflow: scroll;
@@ -36,12 +37,12 @@ const Content = styled.code`
 `;
 
 const FileName = styled.h2`
-  color: var(--color-ink600);
+  color: ${(props) => props.theme.color.ink600};
   font-weight: 600;
   font-size: 1.2em;
   line-height: 1.7;
 `;
 
 const Path = styled.p`
-  color: var(--color-ink400);
+  color: ${(props) => props.theme.color.ink400};
 `;
