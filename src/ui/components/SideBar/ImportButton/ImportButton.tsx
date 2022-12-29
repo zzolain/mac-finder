@@ -1,4 +1,4 @@
-import { useFileTreeStore } from "../../../domains/FileEntry/hooks/useFileTreeStore";
+import { useFileTreeStore } from "../../../../domains/FileEntry/hooks/useFileTreeStore";
 import styled from "styled-components";
 import { TbFileImport } from "react-icons/tb";
 
@@ -13,7 +13,8 @@ export const ImportButton = () => {
   return (
     <Container>
       <Label htmlFor="json-input" role="button">
-        <TbFileImport className="icon" /> Import
+        <TbFileImport className="icon" />
+        <Title>Import</Title>
       </Label>
       <HiddenInput
         id="json-input"
@@ -47,6 +48,11 @@ const Label = styled.label`
     height: 1.2em;
   }
 `;
+const Title = styled.p`
+  font-size: 0.9em;
+  color: ${(props) => props.theme.color.ink600};
+`;
+
 const HiddenInput = styled.input`
   display: none;
 `;

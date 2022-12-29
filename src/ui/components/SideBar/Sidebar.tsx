@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import ImportButton from "../ImportButton";
+import ImportButton from "./ImportButton";
+import GithubLink from "./GithubLink";
 
 export const Sidebar = () => {
   return (
@@ -12,6 +13,7 @@ export const Sidebar = () => {
       <Section>
         <SectionLabel>Favorite</SectionLabel>
         <ImportButton />
+        <GithubLink />
       </Section>
     </Container>
   );
