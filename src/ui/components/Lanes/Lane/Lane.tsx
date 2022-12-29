@@ -42,6 +42,7 @@ const Container = styled.ul`
   height: 100%;
   padding: 10px;
   position: relative;
+  overflow-y: scroll;
 `;
 const Border = styled.div`
   position: absolute;
