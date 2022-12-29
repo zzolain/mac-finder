@@ -11,7 +11,10 @@ export const SearchBar = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [keyword, setKeyword] = useState("");
   const [isFocused, setIsFocused] = useState(false);
-  const { search } = useFileTreeStore((state) => ({ search: state.search }));
+  const { search, jumpTo } = useFileTreeStore((state) => ({
+    search: state.search,
+    jumpTo: state.jumpTo,
+  }));
   const [searchResult, setSearchResult] = useState<FileEntry[]>([]);
 
   const reset = () => {
@@ -48,6 +51,11 @@ export const SearchBar = () => {
     inputRef.current?.focus();
   }, []);
 
+  const onResultItemClick = useCallback((fileEntry: FileEntry) => {
+    jumpTo(fileEntry);
+    reset();
+  }, []);
+
   return (
     <Container>
       <label htmlFor="search">
@@ -69,7 +77,10 @@ export const SearchBar = () => {
         {searchResult.length > 0 && (
           <SearchResult>
             {searchResult.map((fileEntry) => (
-              <ResultItem key={fileEntry.name}>
+              <ResultItem
+                key={fileEntry.name}
+                onClick={() => onResultItemClick(fileEntry)}
+              >
                 <ResultItemName>
                   <HighlightedText target={fileEntry.name} keyword={keyword} />
                 </ResultItemName>
@@ -159,6 +170,7 @@ const SearchResult = styled.ul`
   border-radius: 8px;
   border: 0.5px solid ${(props) => props.theme.color.ink400};
   box-shadow: 1px 2px 10px ${(props) => props.theme.color.ink400};
+  z-index: ${(props) => props.theme.zIndex.searchResult};
 `;
 
 const ResultItem = styled.li`

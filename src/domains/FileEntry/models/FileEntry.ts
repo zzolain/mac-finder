@@ -7,5 +7,7 @@ export abstract class FileEntry {
     return `${this.parent.getPath()}/${this.name}`;
   }
 
+  abstract getChild(name: string): FileEntry | null;
+
   abstract search(keyword: string): FileEntry[];
 }

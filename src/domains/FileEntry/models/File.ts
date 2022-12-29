@@ -5,6 +5,10 @@ export class File extends FileEntry {
     super(name, parent);
   }
 
+  getChild(name: string): FileEntry | null {
+    return null;
+  }
+
   search(_: string): FileEntry[] {
     return [];
   }

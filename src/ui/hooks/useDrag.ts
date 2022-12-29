@@ -24,7 +24,6 @@ export const useDrag = (
 
   const cleanUpListeners = useCallback(() => {
     if (!target.current) return;
-    console.log("CLEARD");
     target.current?.removeEventListener("pointerdown", onPointerDown);
     window.removeEventListener("pointermove", onPointerMove);
     window.removeEventListener("pointerup", onPointerUp);

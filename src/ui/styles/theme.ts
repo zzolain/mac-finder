@@ -17,4 +17,7 @@ export const theme = {
   layout: {
     sidebarWidth: "180px",
   },
+  zIndex: {
+    searchResult: 10,
+  },
 };
