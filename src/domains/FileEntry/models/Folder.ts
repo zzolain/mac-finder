@@ -24,4 +24,12 @@ export class Folder extends FileEntry {
   getChildren() {
     return Object.values(this.children);
   }
+
+  search(keyword: string): FileEntry[] {
+    return this.getChildren().reduce((result: FileEntry[], child) => {
+      const withFromChild = result.concat(child.search(keyword));
+      if (!child.name.includes(keyword)) return withFromChild;
+      return withFromChild.concat(child);
+    }, []);
+  }
 }

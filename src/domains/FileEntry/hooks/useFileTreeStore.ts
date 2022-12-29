@@ -15,6 +15,7 @@ type Actions = {
   goToChild: () => void;
   goToParent: () => void;
   goToSibling: (direction: "prev" | "next") => void;
+  search: (keyword: string) => FileEntry[];
   reset: () => void;
 };
 
@@ -68,6 +69,12 @@ export const useFileTreeStore = create<States & Actions>((set, get) => ({
     const prevDepth = path.slice(0, path.length - 1);
     const indexDirection = direction === "prev" ? -1 : +1;
     set({ path: prevDepth.concat(siblings[currentIndex + indexDirection]) });
+  },
+  search: (keyword) => {
+    if (keyword.length < 1) return [];
+    const { root } = get();
+    if (!root) return [];
+    return root.search(keyword);
   },
   reset: () => set(initialState),
 }));

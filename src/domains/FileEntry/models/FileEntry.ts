@@ -6,4 +6,6 @@ export abstract class FileEntry {
     if (!this.parent) return ROOT_PATH;
     return `${this.parent.getPath()}/${this.name}`;
   }
+
+  abstract search(keyword: string): FileEntry[];
 }
