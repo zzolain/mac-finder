@@ -21,7 +21,8 @@ const Container = styled.div`
 `;
 
 const ContentContainer = styled.div`
-  flex: 0 0 300px;
+  flex: 0 0 400px;
+  min-width: 400px;
   border: 0.5px solid ${(props) => props.theme.color.ink400};
   border-radius: 5px;
   padding: 0.4em 0.6em;
