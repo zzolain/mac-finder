@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { TbChevronLeft, TbChevronRight, TbSearch } from "react-icons/tb";
 import { useFileTreeStore } from "../../domains/FileEntry/hooks/useFileTreeStore";
 import { useMemo } from "react";
+import { useCallback } from "react";
 
 export const StatusBar = () => {
   const { path, goToParent, goToChild } = useFileTreeStore((state) => ({
@@ -14,8 +15,8 @@ export const StatusBar = () => {
     [path]
   );
 
-  const onClickLeftButton = () => goToParent();
-  const onClickRightButton = () => goToChild();
+  const onClickLeftButton = useCallback(() => goToParent(), []);
+  const onClickRightButton = useCallback(() => goToChild(), []);
 
   return (
     <Container>
