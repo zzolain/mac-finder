@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Sidebar from "./components/SideBar";
-import StatusBar from "./components/StatusBar";
-import Lanes from "./components/Lanes";
+import Sidebar from "./ui/components/SideBar";
+import StatusBar from "./ui/components/StatusBar";
+import Lanes from "./ui/components/Lanes";
 
 function App() {
   return (

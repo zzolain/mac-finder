@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { TbChevronLeft, TbChevronRight, TbSearch } from "react-icons/tb";
-import { useFileTreeStore } from "../../domains/FileEntry/hooks/useFileTreeStore";
+import { useFileTreeStore } from "../../../domains/FileEntry/hooks/useFileTreeStore";
 import { useMemo } from "react";
 import { useCallback } from "react";
 import SearchBar from "../SearchBar";

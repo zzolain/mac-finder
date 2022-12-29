@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from "react";
-import { useFileTreeStore } from "../../../domains/FileEntry/hooks/useFileTreeStore";
-import { FileEntry } from "../../../domains/FileEntry/models/FileEntry";
-import { Folder } from "../../../domains/FileEntry/models/Folder";
-import { File } from "../../../domains/FileEntry/models/File";
+import { useFileTreeStore } from "../../../../domains/FileEntry/hooks/useFileTreeStore";
+import { FileEntry } from "../../../../domains/FileEntry/models/FileEntry";
+import { Folder } from "../../../../domains/FileEntry/models/Folder";
+import { File } from "../../../../domains/FileEntry/models/File";
 import styled from "styled-components";
 import { TbFolder, TbFile, TbChevronRight } from "react-icons/tb";
 

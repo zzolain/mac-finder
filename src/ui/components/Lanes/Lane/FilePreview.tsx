@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { File } from "../../../domains/FileEntry/models/File";
+import { File } from "../../../../domains/FileEntry/models/File";
 
 type Props = {
   file: File;

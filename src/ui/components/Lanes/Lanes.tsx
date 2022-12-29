@@ -1,8 +1,8 @@
 import { useCallback, KeyboardEvent } from "react";
 import styled from "styled-components";
-import { useFileTreeStore } from "../../domains/FileEntry/hooks/useFileTreeStore";
-import { Folder } from "../../domains/FileEntry/models/Folder";
-import { File } from "../../domains/FileEntry/models/File";
+import { useFileTreeStore } from "../../../domains/FileEntry/hooks/useFileTreeStore";
+import { Folder } from "../../../domains/FileEntry/models/Folder";
+import { File } from "../../../domains/FileEntry/models/File";
 import { Lane } from "./Lane/Lane";
 import { FilePreview } from "./Lane/FilePreview";
 

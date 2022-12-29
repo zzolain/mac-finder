@@ -1,4 +1,4 @@
-import { useFileTreeStore } from "../../domains/FileEntry/hooks/useFileTreeStore";
+import { useFileTreeStore } from "../../../domains/FileEntry/hooks/useFileTreeStore";
 import styled from "styled-components";
 import { TbFileImport } from "react-icons/tb";
 
