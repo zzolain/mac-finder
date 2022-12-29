@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Folder } from "../../../domains/FileEntry/models/Folder";
 import { FileEntryItem } from "./FileEntryItem";
-import { useRef, useCallback, useState } from "react";
-import { useEffect } from "react";
+import { useRef } from "react";
+import { useDrag } from "../../../hooks/useDrag";
 
 const MIN_WIDTH = 200;
 
@@ -12,35 +12,16 @@ type Props = {
 };
 export const Lane = ({ depth, folder: fileEntry }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
+  const borderRef = useRef<HTMLDivElement>(null);
 
-  const onPointerDown = () => setIsDragging(true);
-  const onPointerUp = () => setIsDragging(false);
-  const onPointerMove = (e: PointerEvent) => {
-    if (!isDragging) return;
+  const onBorderDrag = (e: PointerEvent) => {
     if (!containerRef.current) return;
     const width = e.clientX - containerRef.current.offsetLeft;
     if (width > MIN_WIDTH) {
       containerRef.current.style.width = `${width}px`;
     }
   };
-
-  const addListeners = useCallback(() => {
-    window.addEventListener("pointermove", onPointerMove);
-    window.addEventListener("pointerup", onPointerUp);
-  }, [onPointerMove, onPointerUp]);
-
-  const cleanUpListeners = useCallback(() => {
-    window.removeEventListener("pointermove", onPointerMove);
-    window.removeEventListener("pointerup", onPointerUp);
-  }, [onPointerMove, onPointerUp]);
-
-  useEffect(() => {
-    if (isDragging) {
-      addListeners();
-    }
-    return cleanUpListeners;
-  }, [isDragging, onPointerMove, onPointerUp]);
+  const _ = useDrag(borderRef, onBorderDrag);
 
   return (
     <Container ref={containerRef}>
@@ -49,7 +30,7 @@ export const Lane = ({ depth, folder: fileEntry }: Props) => {
           <FileEntryItem key={child.name} depth={depth} fileEntry={child} />
         ))}
       </Content>
-      <Border onPointerDown={onPointerDown} />
+      <Border ref={borderRef} />
     </Container>
   );
 };
