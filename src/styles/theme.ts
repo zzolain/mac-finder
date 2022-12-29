@@ -10,7 +10,8 @@ export const theme = {
     red: "#ff5e56",
     yellow: "#febc2e",
     green: "#28c840",
-    blue: "#0064e1",
+    blue100: "#8baef4",
+    blue400: "#0064e1",
     skyblue: "#6fcffb",
   },
   layout: {

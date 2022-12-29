@@ -41,7 +41,7 @@ const Label = styled.label`
     filter: brightness(90%);
   }
   .icon {
-    color: ${(props) => props.theme.color.blue};
+    color: ${(props) => props.theme.color.blue400};
     vertical-align: middle;
     width: 1.2em;
     height: 1.2em;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/SideBar";
 import StatusBar from "./components/StatusBar";
 import Lanes from "./components/Lanes";
 

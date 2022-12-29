@@ -3,6 +3,7 @@ import { TbChevronLeft, TbChevronRight, TbSearch } from "react-icons/tb";
 import { useFileTreeStore } from "../../domains/FileEntry/hooks/useFileTreeStore";
 import { useMemo } from "react";
 import { useCallback } from "react";
+import SearchBar from "../SearchBar";
 
 export const StatusBar = () => {
   const { path, goToParent, goToChild } = useFileTreeStore((state) => ({
@@ -34,7 +35,7 @@ export const StatusBar = () => {
         <EntryName>{entryName}</EntryName>
       </LeftCol>
       <RightCol>
-        <SearchIcon role="button" title="search" />
+        <SearchBar />
       </RightCol>
     </Container>
   );
@@ -83,15 +84,4 @@ const EntryName = styled.span`
 const RightCol = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const SearchIcon = styled(TbSearch)`
-  font-size: 20px;
-  color: ${(props) => props.theme.color.ink400};
-  margin: 5px;
-  vertical-align: middle;
-  cursor: pointer;
-  :hover {
-    color: ${(props) => props.theme.color.ink500};
-  }
 `;

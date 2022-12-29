@@ -58,7 +58,7 @@ const Container = styled.li<ContainerProps>`
   padding: 3px;
   background-color: ${(props) =>
     props.currentSelected
-      ? props.theme.color.blue
+      ? props.theme.color.blue400
       : props.selectedBefore
       ? props.theme.color.ink300
       : "unset"};
