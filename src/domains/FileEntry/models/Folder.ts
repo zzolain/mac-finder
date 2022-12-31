@@ -1,3 +1,4 @@
+import { File } from "./File";
 import { FileEntry } from "./FileEntry";
 
 type FolderChildren = {
@@ -22,7 +23,18 @@ export class Folder extends FileEntry {
     return this.children[name] ?? null;
   }
   getChildren() {
-    return Object.values(this.children);
+    return Object.values(this.children).sort((a, b) => {
+      if (a instanceof Folder && b instanceof File) {
+        return -1;
+      }
+      if (a instanceof File && b instanceof Folder) {
+        return 1;
+      }
+      if (a.name < b.name) {
+        return -1;
+      }
+      return 1;
+    });
   }
 
   search(keyword: string): FileEntry[] {
