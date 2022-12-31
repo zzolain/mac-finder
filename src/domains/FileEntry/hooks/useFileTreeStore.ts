@@ -1,8 +1,11 @@
 import create from "zustand";
+import toast from "react-hot-toast";
+import { ZodError } from "zod";
 import { Folder } from "../models/Folder";
 import { FileEntry } from "../models/FileEntry";
 import { fileEntryTranslator } from "../translator/fileEntryTranslator";
 import SAMPLE_JSON from "../../../assets/sample/sample-file-tree.json";
+import { getErrorWithMessage } from "../../../utils/error";
 
 type States = {
   root: Folder | null;
@@ -37,8 +40,9 @@ export const useFileTreeStore = create<States & Actions>((set, get) => ({
       validateFile(file);
       const root = await readFile(file);
       set({ root, path: [root] });
-    } catch (error) {
-      console.error(error);
+    } catch (unknownError) {
+      const error = getErrorWithMessage(unknownError);
+      toast.error(error.message);
     }
   },
   select: (depth, fileEntry) => {
@@ -104,17 +108,22 @@ const readFile = (file: File): Promise<Folder> => {
 
     fileReader.onerror = (event) => {
       if (!event.target?.error) return;
-      reject(event.target.error);
+      reject(new Error(event.target.error.message));
     };
 
     fileReader.onload = (event) => {
       try {
-        if (!event.target?.result || typeof event.target.result !== "string")
+        if (!event.target?.result || typeof event.target.result !== "string") {
           throw new Error("파일을 읽는 데 실패하였습니다.");
-        const json = JSON.parse(event.target.result);
+        }
+        const json = JSON.parse(event.target.result) ?? {};
         const root = fileEntryTranslator.fromJSON(json);
         resolve(root);
       } catch (error) {
+        console.error(error);
+        if (error instanceof SyntaxError || error instanceof ZodError) {
+          reject(new Error("지원하지 않는 JSON 형식 입니다."));
+        }
         reject(error);
       }
     };
