@@ -6,9 +6,11 @@ export const ImportButton = () => {
   const read = useFileTreeStore((state) => state.read);
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (e.target?.files && e.target.files[0]) {
-      read(e.target.files[0]);
+    const file = e.target.files?.[0];
+    if (file) {
+      read(file);
     }
+    e.target.value = "";
   };
   return (
     <Container>

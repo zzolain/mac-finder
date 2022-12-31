@@ -42,7 +42,7 @@ export const useFileTreeStore = create<States & Actions>((set, get) => ({
       set({ root, path: [root] });
     } catch (unknownError) {
       const error = getErrorWithMessage(unknownError);
-      toast.error(error.message);
+      toast(error.message);
     }
   },
   select: (depth, fileEntry) => {
@@ -122,7 +122,11 @@ const readFile = (file: File): Promise<Folder> => {
       } catch (error) {
         console.error(error);
         if (error instanceof SyntaxError || error instanceof ZodError) {
-          reject(new Error("지원하지 않는 JSON 형식 입니다."));
+          reject(
+            new Error(
+              "지원하지 않는 JSON 형식 입니다.\n\n{\n'folderName.fileName': 'fileContent'\n}\n\n형식인지 확인해주세요."
+            )
+          );
         }
         reject(error);
       }
