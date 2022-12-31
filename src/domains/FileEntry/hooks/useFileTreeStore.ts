@@ -4,7 +4,7 @@ import { ZodError } from "zod";
 import { Folder } from "../models/Folder";
 import { FileEntry } from "../models/FileEntry";
 import { fileEntryTranslator } from "../translator/fileEntryTranslator";
-import SAMPLE_JSON from "../../../assets/sample/sample-file-tree.json";
+import SAMPLE_JSON from "../../../assets/sample/valid-sample.json";
 import { getErrorWithMessage } from "../../../utils/error";
 
 type States = {
