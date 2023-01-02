@@ -35,6 +35,8 @@ MacOS의 Finder 앱 클론
 
 ![preview](/public/readme/preview.gif)
 
+[Demo](https://mac-finder-c1d4d.web.app/)
+
 ## 실행방법
 
 ```bash
